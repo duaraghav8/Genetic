@@ -20,7 +20,7 @@ class Trainer:
 
 		while (True):
 			fitnesses = [self.fitness (i) for i in self.population];
-#			print (fitnesses [0]);
+			print (max (fitnesses));
 #			uncomment the line above if you wish to see the progress of the fitness. It rises to 0.778 (best fitness is 1, which is the target word) and then stops improving.
 			sortedPop = [i for (h, i) in sorted (zip (fitnesses, self.population))];
 			fitnesses.sort ();
@@ -58,7 +58,7 @@ def fitnessFunc (caseString):
 		if (caseString [i] == targetString [i]):
 			counter += 1;
 
-	return ( (counter / len (targetString)) ** 2);
+	return ( counter / len (targetString));
 
 if (__name__ == '__main__'):
 	population = [i.rstrip () for i in open ('population', 'r').readlines ()];
