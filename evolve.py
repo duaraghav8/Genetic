@@ -57,7 +57,7 @@ def fitnessFunc (caseString):
 		if (caseString [i] == targetString [i]):
 			counter += 1;
 
-	return (counter / len (targetString));
+	return ( (counter / len (targetString)) ** 2);
 
 if (__name__ == '__main__'):
 	population = [i.rstrip () for i in open ('population', 'r').readlines ()];
