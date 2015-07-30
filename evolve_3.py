@@ -37,6 +37,7 @@ class Trainer:
 			nextGen = sortedPop [ : fraction];
 
 			#CROSSOVER
+			#Extremely important to notice that I am only generating 1 offspring from the crossover. If I generate 2 and keep the rest of the process similar, it still gives me the correct answer but after 19 generations (double the time)
 			fraction = int ((self.cross / 100) * len (fitnesses));
 			if (not fraction % 2 == 0):
 				fraction -= 1;
