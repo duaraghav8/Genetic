@@ -21,7 +21,7 @@ class Trainer:
 		while (True):
 			fitnesses = [self.fitness (i) for i in self.population];
 			print (max (fitnesses));
-#			uncomment the line above if you wish to see the progress of the fitness. It rises to 0.778 (best fitness is 1, which is the target word) and then stops improving.
+#			comment the line above if do not you wish to see the progress of the fitness.
 			sortedPop = [i for (h, i) in sorted (zip (fitnesses, self.population))];
 			fitnesses.sort ();
 
