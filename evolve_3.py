@@ -10,9 +10,6 @@ class Trainer:
 		self.mutation = mutation
 		self.cross = crossover
 
-		self.crossMask = '111100000';	#this is AD HOC, aka, bad practice
-
-
 	def evolve (self):
 		nextGen = [];
 		sortedPop = [];
