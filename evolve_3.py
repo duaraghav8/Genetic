@@ -10,9 +10,6 @@ class Trainer:
 		self.mutation = mutation
 		self.cross = crossover
 
-		self.crossMask = '111100000';	#this is AD HOC, aka, bad practice
-
-
 	def evolve (self):
 		nextGen = [];
 		sortedPop = [];
@@ -21,8 +18,8 @@ class Trainer:
 		while (True):
 			fitnesses = [self.fitness (i) for i in self.population];
 			print (max (fitnesses));
-#			uncomment the line above if you wish to see the progress of the fitness. It rises to 0.778 (best fitness is 1, which is the target word) and then stops improving.
-			sortedPop = [i for (h, i) in sorted (zip (fitnesses, self.population))];
+#			comment the line above if do not you wish to see the progress of the fitness.
+			sortedPop = [i for (h, i) in sorted (zip (fitnesses, self.population))];	#All chromosomes are sorted in decreasing order of their fitness. The replication, crossover and mutation - all happen from top down. So if crossover rate is 60%, we take top 60% of the chromosomes
 			fitnesses.sort ();
 
 			sortedPop.reverse ();
@@ -33,11 +30,12 @@ class Trainer:
                                 print ("Hypothess found: ", sortedPop [fitnesses.index (max (fitnesses))]);
                                 break;
 
-			fraction = int (((100 - self.cross) / 100) * len (fitnesses));
+			fraction = int (((100 - self.cross) / 100) * len (fitnesses));	#fraction of population which is to be simply replicated into the next generation
 			nextGen = sortedPop [ : fraction];
 
 			#CROSSOVER
-			fraction = int ((self.cross / 100) * len (fitnesses));
+			#Extremely important to notice that I am only generating 1 offspring from the crossover. If I generate 2 and keep the rest of the process similar, it still gives me the correct answer but after 19 generations (double the time)
+			fraction = int ((self.cross / 100) * len (fitnesses));	#fraction of population to be used for reproduction (this number MUST be even because reproduction will happen in pairs)
 			if (not fraction % 2 == 0):
 				fraction -= 1;
 
@@ -57,7 +55,7 @@ class Trainer:
 				nextGen.append (offspring);
 
 			#MUTATION
-			fraction = int ((self.mutation / 100) * len (fitnesses));
+			fraction = int ((self.mutation / 100) * len (fitnesses));	#fraction of population to undergo mutation before being transmitted to the next generation
 			for i in range (0, fraction):
 				nextGen [i] = nextGen [i].replace (choice (nextGen [i]), choice (ascii_letters), 1);
 				
